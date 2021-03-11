@@ -7,15 +7,17 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", func(w http.ResponseWriter, q *http.Request) {
-		message := map[string]string{
-			"message": "hello world",
-		}
-		jsonMessage, err := json.Marshal(message)
-		if err != nil {
-			panic(err.Error())
-		}
-		w.Write(jsonMessage)
-	})
+	mux.HandleFunc("/", baseHandler)
 	http.ListenAndServe("127.0.0.1:3000", mux)
+}
+
+func baseHandler(w http.ResponseWriter, q *http.Request) {
+	message := map[string]string{
+		"message": "hello world",
+	}
+	jsonMessage, err := json.Marshal(message)
+	if err != nil {
+		panic(err.Error())
+	}
+	w.Write(jsonMessage)
 }
