@@ -2,7 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"html"
 	"net/http"
+
+	"github.com/julienschmidt/httprouter"
 )
 
 type Person struct {
@@ -14,6 +18,9 @@ type Person struct {
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", baseHandler)
+
+	router := httprouter.New()
+	router.GET("/:path", jsonHandler)
 	http.ListenAndServe("127.0.0.1:3000", mux)
 }
 
@@ -26,4 +33,8 @@ func baseHandler(w http.ResponseWriter, q *http.Request) {
 		panic(err.Error())
 	}
 	w.Write(jsonMessage)
+}
+
+func jsonHandler(w http.ResponseWriter, q *http.Request, _ httprouter.Params) {
+	fmt.Fprintf(w, "Hello, %q", html.EscapeString(q.URL.Path))
 }
