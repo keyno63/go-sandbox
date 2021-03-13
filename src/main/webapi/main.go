@@ -21,7 +21,8 @@ func main() {
 
 	router := httprouter.New()
 	router.GET("/:path", jsonHandler)
-	http.ListenAndServe("127.0.0.1:3000", mux)
+	//http.ListenAndServe("127.0.0.1:3000", mux)
+	http.ListenAndServe("127.0.0.1:3000", router)
 }
 
 func baseHandler(w http.ResponseWriter, q *http.Request) {
