@@ -36,6 +36,6 @@ func baseHandler(w http.ResponseWriter, q *http.Request) {
 	w.Write(jsonMessage)
 }
 
-func jsonHandler(w http.ResponseWriter, q *http.Request, _ httprouter.Params) {
+func jsonHandler(w http.ResponseWriter, q *http.Request, p httprouter.Params) {
 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(q.URL.Path))
 }
