@@ -37,5 +37,5 @@ func baseHandler(w http.ResponseWriter, q *http.Request) {
 }
 
 func jsonHandler(w http.ResponseWriter, q *http.Request, p httprouter.Params) {
-	fmt.Fprintf(w, "Hello, %q", html.EscapeString(q.URL.Path))
+	fmt.Fprintf(w, "Hello, %q", p.ByName("user"))
 }
