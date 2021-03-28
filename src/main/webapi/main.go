@@ -23,6 +23,7 @@ func main() {
 	router.GET("/:path", jsonHandler)
 	//router.GET("/sample/:path", baseHandler)
 	//http.ListenAndServe("127.0.0.1:3000", mux)
+
 	http.ListenAndServe("127.0.0.1:3000", router)
 }
 
