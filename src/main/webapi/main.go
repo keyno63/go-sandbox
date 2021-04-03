@@ -23,7 +23,6 @@ func main() {
 	router.GET("/:path", jsonHandler)
 	//router.GET("/sample/:path", jsonHandler)
 	//http.ListenAndServe("127.0.0.1:3000", mux)
-
 	http.ListenAndServe("127.0.0.1:3000", router)
 }
 
@@ -40,5 +39,4 @@ func baseHandler(w http.ResponseWriter, q *http.Request) {
 
 func jsonHandler(w http.ResponseWriter, q *http.Request, p httprouter.Params) {
 	fmt.Fprintf(w, "Hello, %q", p.ByName("user"))
-
 }
