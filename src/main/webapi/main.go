@@ -20,8 +20,8 @@ func main() {
 	mux.HandleFunc("/", baseHandler)
 
 	router := httprouter.New()
-	router.GET("/:path", jsonHandler)
-	//router.GET("/sample/:path", jsonHandler)
+	//router.GET("/:path", jsonHandler)
+	router.GET("/sample/:path", jsonHandler)
 	//http.ListenAndServe("127.0.0.1:3000", mux)
 	http.ListenAndServe("127.0.0.1:3000", router)
 }
