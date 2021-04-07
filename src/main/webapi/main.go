@@ -16,13 +16,14 @@ type Person struct {
 }
 
 func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", baseHandler)
+	//mux := http.NewServeMux()
+	//mux.HandleFunc("/", baseHandler)
+	//mux.HandleFunc("/:path", jsonHandler)
+	//http.ListenAndServe("127.0.0.1:3000", mux)
 
 	router := httprouter.New()
-	//router.GET("/:path", jsonHandler)
+	//router.GET("/", baseHandler)
 	router.GET("/sample/:path", jsonHandler)
-	//http.ListenAndServe("127.0.0.1:3000", mux)
 	http.ListenAndServe("127.0.0.1:3000", router)
 }
 
