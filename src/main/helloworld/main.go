@@ -11,4 +11,9 @@ func main() {
 	)
 	fmt.Printf(string(rune(a1)))
 	//fmt.Printf(string(rune(a2)))
+
+	p1 := map[string]interface{}{
+		"name": "Yamada",
+		"age":  26,
+	}
 }
