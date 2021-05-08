@@ -16,4 +16,6 @@ func main() {
 		"name": "Yamada",
 		"age":  26,
 	}
+	name := p1["name"]
+	fmt.Printf(name.(string))
 }
