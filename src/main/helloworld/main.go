@@ -18,4 +18,10 @@ func main() {
 	}
 	name := p1["name"]
 	fmt.Printf(name.(string))
+
+	fmt.Printf(sampleFunc())
+}
+
+func sampleFunc() string {
+	return "string"
 }
