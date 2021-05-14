@@ -21,7 +21,11 @@ func main() {
 	//mux.HandleFunc("/:path", jsonHandler)
 	//http.ListenAndServe("127.0.0.1:3000", mux)
 
-	fmt.Printf("")
+	value := "value"
+	var xxx *string
+	xxx = &value
+	fmt.Printf("value: %s", *xxx)
+
 	router := httprouter.New()
 	//router.GET("/", baseHandler)
 	router.GET("/sample/:path", jsonHandler)
