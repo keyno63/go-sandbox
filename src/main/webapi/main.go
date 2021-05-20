@@ -20,6 +20,10 @@ func main() {
 	mux.HandleFunc("/", baseHandler)
 	//mux.HandleFunc("/json", jsonHandler)
 	mux.HandleFunc("/cookie", getCookie)
+	mux.HandleFunc("/func", func(w http.ResponseWriter, q *http.Request) {
+		orgHeaderValue := q.Header.Get("org-header")
+		fmt.Fprintf(w, "func, headerValue: %s", orgHeaderValue)
+	})
 	http.ListenAndServe("127.0.0.1:3000", mux)
 
 	value := "value"
