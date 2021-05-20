@@ -68,8 +68,17 @@ func getCookie(w http.ResponseWriter, q *http.Request) {
 	fmt.Fprintf(w, "Hello, key=[%s], value=[%s]", name, value)
 }
 
+// body を Person に分解する
 func getJsonHandle(w http.ResponseWriter, q *http.Request) {
+	var p Person
 
+	err := json.NewDecoder(q.Body).Decode(&p)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	fmt.Fprintf(w, "Person: %+v", p)
 }
 
 // router handler
