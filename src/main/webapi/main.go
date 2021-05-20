@@ -10,12 +10,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-type Person struct {
-	Id       int    `json:"id"`
-	Name     string `json:"name"`
-	Birthday int    `json:"birthday"`
-}
-
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", baseHandler)
