@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"fmt"
 	//"html"
 	"net/http"
@@ -25,6 +26,7 @@ func main() {
 		fmt.Fprintf(w, "func, headerValue: %s", orgHeaderValue)
 	})
 	mux.HandleFunc("/getJson", getJsonHandle)
+	mux.HandleFunc("/getXml", getXmlHandle)
 	http.ListenAndServe("127.0.0.1:3000", mux)
 
 	value := "value"
@@ -79,6 +81,32 @@ func getJsonHandle(w http.ResponseWriter, q *http.Request) {
 	}
 
 	fmt.Fprintf(w, "Person: %+v", p)
+}
+
+func getXmlHandle(w http.ResponseWriter, q *http.Request) {
+
+	// <person>
+	//   <Id>1</Id>
+	//   <Name>Taro</Name>
+	//   <Birthday>1950</Birthday>
+	// </person>
+	type XmlPeople struct {
+		XmlPerson []struct {
+			Id       int    `xml:"id"`
+			Name     string `xml:"name"`
+			Birthday int    `xml:"birthday"`
+		} `xml:"person"`
+	}
+
+	var p XmlPeople
+
+	err := xml.NewDecoder(q.Body).Decode(&p)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	fmt.Fprintf(w, "XmlPeople: %+v", p)
 }
 
 // router handler
