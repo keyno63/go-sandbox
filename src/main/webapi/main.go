@@ -24,6 +24,7 @@ func main() {
 		orgHeaderValue := q.Header.Get("org-header")
 		fmt.Fprintf(w, "func, headerValue: %s", orgHeaderValue)
 	})
+	mux.HandleFunc("/getJson", getJsonHandle)
 	http.ListenAndServe("127.0.0.1:3000", mux)
 
 	value := "value"
@@ -39,13 +40,20 @@ func main() {
 }
 
 func baseHandler(w http.ResponseWriter, q *http.Request) {
-	message := map[string]string{
-		"message": "hello world",
+	type SampleJsonResponse struct {
+		Message string `json:"message"`
 	}
-	jsonMessage, err := json.Marshal(message)
+	value := "hello world"
+	//message := map[string]string{
+	//	"message": "hello world",
+	//}
+	jsonMessage, err := json.Marshal(SampleJsonResponse{value})
 	if err != nil {
-		panic(err.Error())
+		//panic(err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonMessage)
 }
 
@@ -58,6 +66,10 @@ func getCookie(w http.ResponseWriter, q *http.Request) {
 		return
 	}
 	fmt.Fprintf(w, "Hello, key=[%s], value=[%s]", name, value)
+}
+
+func getJsonHandle(w http.ResponseWriter, q *http.Request) {
+
 }
 
 // router handler
