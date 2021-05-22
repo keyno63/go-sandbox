@@ -11,6 +11,7 @@ import (
 )
 
 func main() {
+	fmt.Println("start.")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", baseHandler)
 	//mux.HandleFunc("/json", jsonHandler)
@@ -21,7 +22,7 @@ func main() {
 	})
 	mux.HandleFunc("/getJson", getJsonHandle)
 	mux.HandleFunc("/getXml", getXmlHandle)
-	http.ListenAndServe("127.0.0.1:3000", mux)
+	http.ListenAndServe(":3000", mux)
 
 	value := "value"
 	var xxx *string
