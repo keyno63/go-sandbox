@@ -1,9 +1,14 @@
+BASEDIR=${PWD}
+WORKDIR="${BASEDIR}/src/main/webapi"
+
 .PHONY: build
 build:
 	@echo "Building now."
-	@go build ./src/main/webapi/main.go ./src/main/webapi/person.go
+	@cd ${WORKDIR} && \
+	  go build main.go person.go
 
 .PHONY: run
 run: build
 	@echo "run"
-	@go run ./src/main/webapi/main.go ./src/main/webapi/person.go
+	@cd ${WORKDIR} && \
+	  go run main.go person.go
