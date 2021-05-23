@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	fmt.Printf("Hello world!")
@@ -8,6 +10,8 @@ func main() {
 	fmt.Printf(sampleFunc())
 
 	pointerFunc()
+
+	sampleGoroutine()
 }
 
 func sampleFunc() string {
@@ -39,4 +43,23 @@ func defineMap() {
 	}
 	name := p1["name"]
 	fmt.Printf(name.(string))
+}
+
+func sampleGoroutine() {
+	// channel の生成
+	ch1 := make(chan int)
+	f := func() {
+		a := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+		for _, v := range a {
+			fmt.Printf("%d\n", v)
+			// channel への書き込み
+			ch1 <- v
+		}
+	}
+	go f()
+	//time.Sleep(time.Second * 10)
+	// channel から読み出し
+	value := <-ch1
+	fmt.Printf("go out\n")
+	fmt.Printf("%d", value)
 }
