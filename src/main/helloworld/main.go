@@ -49,17 +49,22 @@ func sampleGoroutine() {
 	// channel の生成
 	ch1 := make(chan int)
 	f := func() {
+		defer close(ch1)
 		a := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 		for _, v := range a {
-			fmt.Printf("%d\n", v)
+			fmt.Printf("add channel: %d\n", v)
 			// channel への書き込み
 			ch1 <- v
 		}
+		//close(ch1)
 	}
 	go f()
-	//time.Sleep(time.Second * 10)
+	//time.Sleep(time.Second * 1)
 	// channel から読み出し
-	value := <-ch1
+	for c := range ch1 {
+		fmt.Printf("read channel: %d\n", c)
+	}
 	fmt.Printf("go out\n")
-	fmt.Printf("%d", value)
+	//value := <-ch1
+	//fmt.Printf("%d", value)
 }
