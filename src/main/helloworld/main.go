@@ -5,20 +5,6 @@ import "fmt"
 func main() {
 	fmt.Printf("Hello world!")
 
-	var (
-		a1 int = 123
-		//a2 int = 456
-	)
-	fmt.Printf(string(rune(a1)))
-	//fmt.Printf(string(rune(a2)))
-
-	p1 := map[string]interface{}{
-		"name": "Yamada",
-		"age":  26,
-	}
-	name := p1["name"]
-	fmt.Printf(name.(string))
-
 	fmt.Printf(sampleFunc())
 
 	pointerFunc()
@@ -35,4 +21,22 @@ func pointerFunc() {
 	p1 = &a1
 	*p1 = 123
 	fmt.Println(a1)
+}
+
+func defineVar() {
+	var (
+		a1 int = 123
+		//a2 int = 456
+	)
+	fmt.Printf(string(rune(a1)))
+	//fmt.Printf(string(rune(a2)))
+}
+
+func defineMap() {
+	p1 := map[string]interface{}{
+		"name": "Yamada",
+		"age":  26,
+	}
+	name := p1["name"]
+	fmt.Printf(name.(string))
 }
