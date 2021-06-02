@@ -5,7 +5,7 @@ Postgres 用の Dcoker を準備するための環境
 ## Dockerfile のビルド
 
 ```shell
-docekr build -t keyno63/postgres .
+docker build -t keyno63/postgres .
 ```
 
 ## Docker の起動
@@ -21,7 +21,7 @@ docker run -p 15432:5432 --name [container name] keyno63/postgres
 ### psql を用いて
 
 ```shell
-psql -l 127.0.0.1  -p 15432 -U keyno63 development
+psql -h 127.0.0.1  -p 15432 -U keyno63 development
 ```
 
 password を聞かれますが、Dockerfile 内の設定を確認してください。  
